@@ -1,0 +1,5 @@
+{
+  "python.analysis.extraPaths": [
+    "./backend/clipboard_manager/api"
+  ]
+}
