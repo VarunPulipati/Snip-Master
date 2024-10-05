@@ -1,0 +1,33 @@
+name: React CI Pipeline
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - uses: actions/checkout@v2
+
+      # Step 2: Set up Node.js (version 14 or whichever version your React app uses)
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14" # Specify the Node.js version your React app requires
+
+      # Step 3: Install project dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Run tests
+      - name: Run tests
+        run: npm test
+
+      # Step 5: Build the React app (if needed for production deployment)
+      - name: Build React app
+        run: npm run build
