@@ -1,0 +1,40 @@
+.home {
+  text-align: center;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #333;
+  color: white;
+}
+
+.nav-brand {
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+}
+
+.nav-links {
+  display: flex;
+}
+
+.nav-item {
+  margin-left: 1rem;
+  text-decoration: none;
+  color: white;
+}
+
+.nav-item:hover {
+  text-decoration: underline;
+}
+
+.home-header {
+  margin: 2rem 0;
+}
+
+.home-content article {
+  margin: 2rem 0;
+}

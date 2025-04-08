@@ -1,0 +1,37 @@
+.navbar {
+  width: 100%;
+  background-color: #333;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-brand {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-links {
+  display: flex;
+}
+
+.nav-item {
+  color: white;
+  text-decoration: none;
+  margin-left: 1rem;
+  cursor: pointer;
+
+}
+
+.nav-item:hover {
+  text-decoration: underline;
+}
+
+body {
+  padding-top: 50px; /* Adjust this value to match the height of your navbar */
+}
