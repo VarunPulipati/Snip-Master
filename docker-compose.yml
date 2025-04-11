@@ -1,0 +1,47 @@
+version: '3.9'
+services:
+  backend:
+    image: snipmaster-backend:latest
+    container_name: snipmaster-backend
+    build:
+      context: ./backend  # Adjust if needed
+    ports:
+      - "8000:8000"
+    environment:
+      DJANGO_SECRET_KEY: "e!&5jr+%v)98)v*a$v5y548ov=^!4d3qz4hf1mf$ryom0lujjj"
+      DB_NAME: "clipboard"
+      DB_USER: "root"
+      DB_PASSWORD: "0000"
+      DB_HOST: "mysql"   # Use the Docker service name 'mysql' for internal networking
+      DB_PORT: "3306"    # Internal MySQL port within the Docker container
+      DEBUG: "True"      # Change to "False" in production
+    depends_on:
+      - mysql
+    volumes:
+      - ./backend:/app
+
+  frontend:
+    image: snipmaster-frontend:latest
+    container_name: snipmaster-frontend
+    build:
+      context: ./frontend  # Adjust if needed
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "0000"
+      MYSQL_DATABASE: "clipboard"  # Matches the DB_NAME environment variable in the backend
+    ports:
+      - "3306:3306"  # Maps container's MySQL (port 3306) to host's port 3307
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

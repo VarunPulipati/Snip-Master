@@ -1,24 +1,25 @@
-# Use an official Python 3.10 runtime as a parent image
-FROM python:3.10-slim
+# Use the latest Python image
+FROM python:3.12.1
+# Use Python as the base image
+FROM python:latest
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-
-# Set the working directory
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the requirements file into the container
+# Copy the requirements.txt first to leverage Docker cache
 COPY requirements.txt /app/
 
-# Install any dependencies
+# Upgrade pip, setuptools, and wheel before installing dependencies
+RUN pip install --upgrade pip setuptools wheel
+
+# Install the required packages
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the entire project into the container
-COPY . /app/
+# Copy the rest of the application code into the container
+COPY . /app
 
 # Expose the port the app runs on
 EXPOSE 8000
 
-# Run Django commands and then start the app
+# Command to run the application
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
